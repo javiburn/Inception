@@ -6,11 +6,11 @@
 #    By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 18:26:50 by jsarabia          #+#    #+#              #
-#    Updated: 2024/03/15 18:27:00 by jsarabia         ###   ########.fr        #
+#    Updated: 2024/03/15 18:46:01 by jsarabia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FROM nginx:latest
+FROM nginx:1.24.0-bullseye
 
 #COPY ... in case I wanted to copy files or directories from src and adds them to the filesystem oof the container at the path dest
 
