@@ -6,19 +6,19 @@
 #    By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 18:26:50 by jsarabia          #+#    #+#              #
-#    Updated: 2024/03/15 18:46:01 by jsarabia         ###   ########.fr        #
+#    Updated: 2024/03/18 16:12:46 by jsarabia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FROM nginx:1.24.0-bullseye
+FROM debian:bullseye
 
 #COPY ... in case I wanted to copy files or directories from src and adds them to the filesystem oof the container at the path dest
 
-COPY nginx.conf etc/nginx/nginx.conf
+RUN apt-get update && apt-get install -y nginx && apt-get clean
 
 EXPOSE 80
 
-#RUN ... in case I wanted to run a service inside a shell inside our container
+COPY nginx.conf etc/nginx/nginx.conf
 
 
 CMD ["nginx", "-g", "daemon off;"]
