@@ -1,6 +1,7 @@
 version: '3.3'
 services:
   nginx:
+    container_name: nginx
     build:
       context: requirements/nginx
       dockerfile: Dockerfile
@@ -15,6 +16,7 @@ services:
     volumes:
       - wordpress:/var/www/html
   mariadb:
+    container_name: mariadb
     build:
       context: requirements/mariadb
       dockerfile: Dockerfile
@@ -27,6 +29,9 @@ services:
     volumes:
       - mysql:/var/lib/mysql
   wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
     build:
       context: requirements/wordpress
       dockerfile: Dockerfile
