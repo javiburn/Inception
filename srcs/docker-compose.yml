@@ -13,21 +13,6 @@ services:
     restart: always
     volumes:
       - db:/var/lib/mysql
-  nginx:
-    container_name: nginx
-    build:
-      context: requirements/nginx
-      dockerfile: Dockerfile
-    ports:
-      - 443:443
-    networks:
-      - marvin
-    env_file: .env
-    restart: always
-    depends_on:
-      - wordpress
-    volumes:
-      - wordpress:/var/www/html
   wordpress:
     container_name: wordpress
     depends_on:
@@ -44,6 +29,21 @@ services:
     volumes:
       - wordpress:/var/www/html
       - ./requirements/wordpress/config/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
+  nginx:
+    container_name: nginx
+    build:
+      context: requirements/nginx
+      dockerfile: Dockerfile
+    ports:
+      - 443:443
+    networks:
+      - marvin
+    env_file: .env
+    restart: always
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html
 volumes:
   wordpress:
     driver: local
