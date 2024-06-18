@@ -43,6 +43,7 @@ services:
     restart: always
     volumes:
       - wordpress:/var/www/html
+      - ./requirements/wordpress/config/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
 volumes:
   wordpress:
     driver: local
@@ -58,4 +59,4 @@ volumes:
       device: /home/jsarabia/data/mariadb
 networks:
   marvin:
-    driver: bridge
+    #driver: bridge
