@@ -51,12 +51,12 @@ volumes:
       type: none
       o: bind
       device: /home/jsarabia/data/wordpress
-  db_data:
+  db:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/jsarabia/data/db_data
+      device: /home/jsarabia/data/db
 networks:
   marvin:
     #driver: bridge
