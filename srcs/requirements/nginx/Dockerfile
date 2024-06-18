@@ -22,11 +22,9 @@ RUN apt-get update; \
 
 COPY ./conf/nginx.conf /etc/nginx/conf.d/nginx.conf
 
-RUN mkdir /etc/nginx/ssl
-
+# Crea los directorios para los certificados SSL
+RUN mkdir -p /etc/ssl/certs /etc/ssl/private
 
 RUN chmod +x script_nginx.sh
-
-#RUN ./script_nginx.sh
 
 CMD ["./script_nginx.sh"]
