@@ -1,12 +1,6 @@
 #!/bin/sh
 
-sleep 9
-while ! mysqladmin ping -h"$WORDPRESS_DB_HOST" --silent; do
-    echo "Waiting for MariaDB..."
-    sleep 2
-done
-
-echo "MariaDB is up and running"
+sleep 10
 
 if [ -f ./wp-config.php ]
 then
