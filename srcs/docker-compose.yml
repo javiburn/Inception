@@ -12,7 +12,7 @@ services:
       - "3306"
     restart: always
     volumes:
-      - mysql:/var/lib/mysql
+      - db:/var/lib/mysql
   nginx:
     container_name: nginx
     build:
@@ -51,12 +51,12 @@ volumes:
       type: none
       o: bind
       device: /home/jsarabia/data/wordpress
-  mysql:
+  db_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/jsarabia/data/mysql
+      device: /home/jsarabia/data/db_data
 networks:
   marvin:
     #driver: bridge
