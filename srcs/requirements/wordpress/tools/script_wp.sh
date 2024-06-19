@@ -9,10 +9,12 @@ done
 
 cd /var/www/html
 
-if [ -f wp-config.php ]
+if [ -f /var/www/html/wp-config.php ]; then
 then
     echo "WordPress already installed."
 else
+    # Download WordPress core files if not already present
+    wp core download --path=/var/www/html --allow-root
     echo "Creating wp-config.php..."
     wp config create --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD --dbhost=$WORDPRESS_DB_HOST --allow-root
     if [ $? -ne 0 ]; then
