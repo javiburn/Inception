@@ -10,7 +10,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     networks:
-      - wp-network
+      - inception
     env_file:
       - .env
     restart: always
@@ -25,7 +25,7 @@ services:
       - wordpress_data:/var/www/html
       - ./requirements/wordpress/config/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
     networks:
-      - wp-network
+      - inception
     env_file:
       - .env
     depends_on:
@@ -41,7 +41,7 @@ services:
     volumes:
       - wordpress_data:/var/www/html
     networks:
-      - wp-network
+      - inception
     depends_on:
       - wordpress
     restart: always
@@ -61,4 +61,5 @@ volumes:
       device: /home/jsarabia/data/db_data
 
 networks:
-  wp-network:
+  inception:
+    name: inception
