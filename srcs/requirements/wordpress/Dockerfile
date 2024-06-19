@@ -12,7 +12,8 @@
 
 FROM debian:bullseye
 
-RUN mkdir /var/www/; mkdir /var/www/html; cd /var/www/html
+# Create necessary directories
+RUN mkdir -p /var/www/html
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y curl \
@@ -23,13 +24,13 @@ RUN apt-get update && apt-get install -y curl \
     mariadb-client \
     sendmail \
     wget \
+    unzip \
     zip
 
-# Install the CLI:
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar --silent
-RUN chmod +x wp-cli.phar
-
-RUN mv wp-cli.phar /usr/local/bin/wp
+# Install WP-CLI
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar --silent && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
 
 # Copy the initialization script
 COPY tools/script_wp.sh /var/www/init_wp.sh
@@ -38,11 +39,13 @@ COPY tools/script_wp.sh /var/www/init_wp.sh
 RUN cd /var/www/html && \
     wget https://wordpress.org/latest.zip && \
     unzip latest.zip && \
-    rm latest.zip
+    rm latest.zip && \
+    mv wordpress/* . && \
+    rmdir wordpress
 
 # Set ownership and permissions
-RUN chown -R www-data:www-data /var/www/html/wordpress && \
-    chmod -R 755 /var/www/html/wordpress
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
 
 # Ensure the init script is executable
 RUN chmod +x /var/www/init_wp.sh
@@ -53,5 +56,5 @@ RUN mkdir -p /run/php
 # Copy custom www.conf file
 COPY config/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-# Set the default command
+# Set the default command to init script
 CMD ["/var/www/init_wp.sh"]
