@@ -52,7 +52,7 @@ RUN chmod +x /var/www/init_wp.sh
 RUN mkdir -p /run/php
 
 # Copy custom www.conf file
-COPY /config/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY config/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 # Set the default command
 CMD ["/var/www/init_wp.sh"]
