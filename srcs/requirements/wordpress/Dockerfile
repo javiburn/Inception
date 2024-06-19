@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y curl \
     php7.4-mysql \
     php7.4-common \
     mariadb-client \
-    #sendmail \
     wget \
     unzip \
     zip
