@@ -38,6 +38,8 @@ else
         echo "Failed to create additional user"
         exit 1
     fi
+    # Run any additional WP-CLI commands
+    wp plugin install jetpack --activate --path=/var/www/html --allow-root
 fi
 
 echo "Starting WordPress..."

@@ -4,6 +4,8 @@
 # Settings especificos a MariaDB server
 [mysqld]
 
+wait_timeout            = 600
+interactive_timeout     = 600
 user                    = mysql
 pid-file                = /run/mysqld/mysqld.pid
 socket                  = /run/mysqld/mysqld.sock
