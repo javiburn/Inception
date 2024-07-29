@@ -23,7 +23,7 @@ services:
       - "9000"
     volumes:
       - wordpress_data:/var/www/html
-      # - ./requirements/wordpress/config/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
+      - ./requirements/wordpress/config/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
     networks:
       - inception
     env_file:
