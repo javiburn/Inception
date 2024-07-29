@@ -20,20 +20,18 @@ else
     fi
 
     echo "Installing WordPress..."
-    wp core install --url='jsarabia.42.fr' --title="Jsarabia's Site" --admin_user=$WORDPRESS_DB_ADMIN --admin_password=$WORDPRESS_ADMIN_PASSWORD --admin_email=fake@fake.com --allow-root
+    wp core install --url='jsarabia.42.fr' --title="Jsarabia's Site" --admin_user=$WORDPRESS_ADMIN_USER --admin_password=$WORDPRESS_ADMIN_PASSWORD --admin_email=fake@fake.com --allow-root
     if [ $? -ne 0 ]; then
         echo "Failed to install WordPress"
         exit 1
     fi
 
+    wp user create $WORDPRESS_USER faker@faker.com --user_pass=$WORDPRESS_USER_PASSWORD --allow-root
     echo "Creating additional user..."
-    wp user create $WORDPRESS_USER faker@faker.com --role=editor --user_pass=$WORDPRESS_USER_PASSWORD --allow-root
     if [ $? -ne 0 ]; then
         echo "Failed to create additional user"
         exit 1
     fi
-    # Run any additional WP-CLI commands
-    wp plugin install jetpack --activate --path=/var/www/html --allow-root
 fi
 
 echo "Starting WordPress..."
