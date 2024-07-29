@@ -2,10 +2,6 @@
 
 # Wait for the database to be ready
 sleep 10
-while ! mysqladmin ping -h"$WORDPRESS_DB_HOST" --silent; do
-    echo "Waiting for MariaDB..."
-    sleep 2
-done
 
 cd /var/www/html
 
